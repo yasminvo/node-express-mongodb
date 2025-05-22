@@ -1,68 +1,77 @@
-# Node.js Express & MongoDB: CRUD Rest APIs
+# Node Express MongoDB - Dockerized
 
-For more detail, please visit:
-> [Node.js, Express & MongoDb: Build a CRUD Rest Api example](https://www.bezkoder.com/node-express-mongodb-crud-rest-api/)
+## Repositório origem
 
-Front-end that works well with this Back-end
-> [Axios Client](https://www.bezkoder.com/axios-request/)
+O trabalho nesse repositário é originário de https://github.com/bezkoder/node-express-mongodb. O trabalho foi usado como base, devido à estrutura web padrão, para prática da disciplina de DevOps (2025/1).
 
-> [Angular 8](https://www.bezkoder.com/angular-crud-app/) / [Angular 10](https://www.bezkoder.com/angular-10-crud-app/) / [Angular 11](https://www.bezkoder.com/angular-11-crud-app/) / [Angular 12](https://www.bezkoder.com/angular-12-crud-app/) / [Angular 13](https://www.bezkoder.com/angular-13-crud-example/) / [Angular 14](https://www.bezkoder.com/angular-14-crud-example/) / [Angular 15](https://www.bezkoder.com/angular-15-crud-example/) / [Angular 16](https://www.bezkoder.com/angular-16-crud-example/) / [Angular 17](https://www.bezkoder.com/angular-17-crud-example/)
+## Participante
 
-> [Vue 2 Client](https://www.bezkoder.com/vue-js-crud-app/) / [Vue 3 Client](https://www.bezkoder.com/vue-3-crud/) / [Vuetify Client](https://www.bezkoder.com/vuetify-data-table-example/)
+Yasmin Victoria Oliveira RA: 812308
 
-> [React Client](https://www.bezkoder.com/react-crud-web-api/) / [React Redux Client](https://www.bezkoder.com/react-redux-crud-example/)
+## Descrição do Projeto
 
-## More Practice
-> [Server side Pagination in Node.js with MongoDB and Mongoose](https://www.bezkoder.com/node-js-mongodb-pagination/)
+Este projeto é uma API backend simples desenvolvida em **Node.js + Express**, com persistência de dados em um banco **MongoDB**. A aplicação permite realizar operações CRUD (Create, Read, Update e Delete) de tutoriais.
 
-> [Node.js Express File Upload to MongoDB example](https://www.bezkoder.com/node-js-upload-store-images-mongodb/)
+A interface de administração do banco de dados é feita utilizando o **Mongo Express**, uma interface web que facilita a visualização e gestão dos dados armazenados no MongoDB.
 
-Security:
-> [Node.js + MongoDB: User Authentication & Authorization with JWT](https://www.bezkoder.com/node-js-mongodb-auth-jwt/)
+O objetivo deste repositório é demonstrar a conteinerização completa de uma aplicação web, utilizando **Docker** e **Docker Compose**, com múltiplos contêineres se comunicando entre si.
 
-Associations:
-> [MongoDB One-to-One relationship tutorial with Mongoose examples](https://www.bezkoder.com/mongoose-one-to-one-relationship-example/)
+---
 
-> [MongoDB One-to-Many Relationship tutorial with Mongoose examples](https://www.bezkoder.com/mongoose-one-to-many-relationship/)
+## Funcionalidades da API
 
-> [MongoDB Many-to-Many Relationship with Mongoose examples](https://www.bezkoder.com/mongodb-many-to-many-mongoose/)
+- Criar tutoriais
+- Listar todos os tutoriais
+- Buscar por título
+- Atualizar um tutorial
+- Deletar um tutorial
+- Marcar como publicado ou não publicado
 
-Fullstack:
-> [Vue + Node.js + Express + MongoDB example](https://www.bezkoder.com/vue-node-express-mongodb-mevn-crud/)
+---
 
-> [Angular 8 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-mongodb-node-express/)
+## Arquitetura dos Contêineres
 
-> [Angular 10 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-10-mongodb-node-express/)
+O projeto roda utilizando **3 contêineres**, cada um com uma responsabilidade específica:
 
-> [Angular 11 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-11-mongodb-node-js-express/)
+| Contêiner      | Descrição                                                                                         | Porta Local |
+|----------------|---------------------------------------------------------------------------------------------------|-------------|
+| `node-app`     | API desenvolvida em **Node.js + Express**, que gerencia os dados dos tutoriais                   | `8080`      |
+| `mongo`        | Banco de dados **MongoDB**, responsável por armazenar os dados                                    | `27017`     |
+| `mongo-express`| Interface web para visualizar e gerenciar o MongoDB de forma gráfica                              | `8081`      |
 
-> [Angular 12 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-12-mongodb-node-js-express/)
 
-> [Angular 13 + Node.js + Express + MongoDB example](https://www.bezkoder.com/mean-stack-crud-example-angular-13/)
+---
 
-> [Angular 14 + Node.js + Express + MongoDB example](https://www.bezkoder.com/mean-stack-crud-example-angular-14/)
+## Como Executar o Projeto
 
-> [Angular 15 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-15-node-js-express-mongodb/)
+### Clone o repositório e suba os containers
 
-> [Angular 16 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-16-node-js-express-mongodb/)
-
-> [Angular 17 + Node.js + Express + MongoDB example](https://www.bezkoder.com/angular-17-node-js-express-mongodb/)
-
-> [React + Node.js + Express + MongoDB example](https://www.bezkoder.com/react-node-express-mongodb-mern-stack/)
-
-Integration (run back-end & front-end on same server/port)
-> [Integrate React with Node.js Restful Services](https://www.bezkoder.com/integrate-react-express-same-server-port/)
-
-> [Integrate Angular with Node.js Restful Services](https://www.bezkoder.com/integrate-angular-12-node-js/)
-
-> [Integrate Vue with Node.js Restful Services](https://www.bezkoder.com/serve-vue-app-express/)
-
-## Project setup
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+docker-compose up -d
 ```
-npm install
+## Acessos
+
+- API Backend:
+http://localhost:8080/api/tutorials
+
+- Mongo Express (Interface do Banco):
+http://localhost:8081
+
+## Testes Rápidos com cURL
+```bash
+curl -X POST http://localhost:8080/api/tutorials \
+-H "Content-Type: application/json" \
+-d '{
+  "title": "Primeiro teste",
+  "description": "Funciona!!!",
+  "published": true
+}'
+
+curl http://localhost:8080/api/tutorials
+
+curl http://localhost:8080/api/tutorials?title=Primeiro
+
 ```
 
-### Run
-```
-node server.js
-```
